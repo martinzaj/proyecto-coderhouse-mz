@@ -1,5 +1,6 @@
 let cantEntradasParaComprar = 0;
 let entradasDisponibles;
+let eventoSeleccionado
 
 
 class Evento {
@@ -18,17 +19,17 @@ class Evento {
 const eventos = {
     evento1: new Evento("Moon time", "Cordoba 1200", "21:30", 2000, 7500, "King Moon", "5/3/23"),
     evento2: new Evento("Ultima gira", "Hipodrimo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento3: new Evento("Butakera", "Santa Fe", "23:50", 500, 1200, "La joaki"),
-    evento3: new Evento("Swift tour", "River", "20:50", 15000,  30000, "Taylow Swift"),
-    evento4: new Evento("XYZ", "Armenia", "17:00", 80, 500, " "),
-    evento5: new Evento("Aveces", "Cervantes", "23:00", 1000, 3000, "Zack")
-  };
+    evento3: new Evento("Butakera", "Santa Fe", "23:50", 500, 1200, "La joaki",""),
+    evento3: new Evento("Swift tour", "River", "20:50", 15000, 30000, "Taylow Swift","30/5/24"),
+    evento4: new Evento("XYZ", "Armenia", "17:00", 80, 500, "",""),
+    evento5: new Evento("Aveces", "Cervantes", "23:00", 1000, 3000, "Zack","")
+};
 
 
 function verEvento() {
 
     let hacerLaCompra = false
-    let entrar = prompt("quiere ver este evento?   si, para acceder")
+    let entrar = prompt("quiere acceder a este evento?   si, para acceder")
     entrar = entrar.toLowerCase()
     if (entrar == "si") {
         hacerLaCompra = true
@@ -59,7 +60,6 @@ function verEvento() {
         botonMasPresionado = false;
     }
 }
-
 function hacerEntradasParaComprar(cantEntradasParaComprar, botonMenosPresionado, botonMasPresionado) {
 
     if ((cantEntradasParaComprar >= 0 && cantEntradasParaComprar <= 3) && (botonMasPresionado == true)) {
@@ -76,28 +76,54 @@ function hacerEntradasParaComprar(cantEntradasParaComprar, botonMenosPresionado,
     }
     else { return cantEntradasParaComprar }
 }
-
 function hacerEntradasRestantes(entradasDisponibles, entradasParaComprar) { return entradasDisponibles - entradasParaComprar }
+function seleccionarEvento() {
+    let numEvento = prompt("¿Qué evento desea ver? (debe ser numérico)");
+
+    eventoSeleccionado = `evento${numEvento}`;
+
+    if (eventos.hasOwnProperty(eventoSeleccionado)) {
+        entradasDisponibles = eventos[eventoSeleccionado].entradasDisponibles;
+        alert("las entradas disponibles para " + eventos[eventoSeleccionado].titulo + " son " + entradasDisponibles);
+    } else {
+        console.log("Evento no encontrado");
+        return;
+    }
+}
+function buscarPorArtista() {
+    let artsitaBuscado = prompt("que artista quiere buscar? ")
+    const Arstistas = Object.values(eventos).filter((el) => el.artista.includes(artsitaBuscado))
+    console.table(Arstistas)
+}
+function buscarTodosLosEventos() {
+
+    let x = prompt("quiere ver todos lo eventos")
+    x = x.toLocaleLowerCase();
+    if (x == "si") {
+        const TodasLosObjetos = Object.values(eventos).map((el) => {
+            return {
+                Artista: el.artista,
+                Evento: el.titulo,
+                Dia: el.dia,
+                Precio: el.precio
+            }
+        })
+
+        console.table(TodasLosObjetos)
+    }
+    else { return }
+}
 
 
+buscarPorArtista();
+buscarTodosLosEventos()
 
+seleccionarEvento();
+verEvento();
 
-let numEvento =prompt("¿Qué evento desea ver? (debe ser numérico)");
-
-let eventoSeleccionado = `evento${ numEvento}`;
-
-if (eventos.hasOwnProperty(eventoSeleccionado)) {
-    entradasDisponibles = eventos[eventoSeleccionado].entradasDisponibles;
-    alert("las entradas disponibles para "  + eventos[eventoSeleccionado].titulo + " son " + entradasDisponibles)
-  } else {
-    console.log("Evento no encontrado");
-  }
-
-
-verEvento()
 entradasDisponibles = hacerEntradasRestantes(entradasDisponibles, cantEntradasParaComprar);
 console.log(entradasDisponibles);
 
-alert("las entradas restantes luego de su compra para "  + eventos[eventoSeleccionado].titulo + " son " + entradasDisponibles)
+alert("las entradas restantes luego de su compra para " + eventos[eventoSeleccionado].titulo + " son " + entradasDisponibles)
 eventos[eventoSeleccionado].entradasDisponibles = entradasDisponibles;
 
