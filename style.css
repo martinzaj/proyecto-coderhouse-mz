@@ -1,0 +1,45 @@
+.custom-modal {
+    margin-top: 20px;
+}
+
+.custom-modal-content {
+    border-radius: 20px;
+    background-color: violet;
+    color: white;
+}
+
+.modal-info-container .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#info-evento .modal-header {
+    text-align: center;
+}
+
+#info-evento .modal-title {
+    margin: 0 auto;
+}
+
+#info-evento {
+    margin-top: 20px;
+}
+
+#contenedor-de-eventos {
+    margin-bottom: 50px;
+}
+
+.carrito-entradas {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .carrito-entradas i {
+    margin-right: 5px;
+  }
+  
+  .carrito-entradas h1 {
+    margin: 0;
+  }
