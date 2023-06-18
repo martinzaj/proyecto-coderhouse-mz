@@ -24,8 +24,7 @@ function seleccionarEvento(evento) {
 
 function buscarPorArtista() {
     let artistaBuscado = prompt("¿Qué artista desea buscar?");
-    const artistasEncontrados = Object.values(eventos).filter((el) =>
-        el.artista.includes(artistaBuscado)
+    const artistasEncontrados = eventos.filter((el) =>el.artista.includes(artistaBuscado)
     );
     console.table(artistasEncontrados);
 }
@@ -35,7 +34,7 @@ function buscarTodosLosEventos() {
     respuesta = respuesta.toLowerCase();
 
     if (respuesta === "si") {
-        const todosLosEventos = Object.values(eventos).map((el) => {
+        const todosLosEventos = (eventos).map((el) => {
             return {
                 Artista: el.artista,
                 Evento: el.titulo,
@@ -46,6 +45,21 @@ function buscarTodosLosEventos() {
 
         console.table(todosLosEventos);
     }
+}
+
+function hacerLaCompra() {
+    const hacerLaCompra = confirm("¿Quiere acceder a este evento?");
+    if (hacerLaCompra) {
+        alert("¡Haga su compra!");
+    }
+}
+
+
+
+function actualizarCantidadEntradas() {
+    cantEntradasElement.textContent = cantEntradasParaComprar;
+    entradasDisponibles = hacerEntradasRestantes(evento.entradasDisponibles, cantEntradasParaComprar);
+    console.log(entradasDisponibles);
 }
 
 class Evento {
@@ -60,27 +74,28 @@ class Evento {
     }
 }
 
-const eventos = {
-    evento1: new Evento("Moon time", "Cordoba 1200", "21:30", 2000, 7500, "King Moon", "5/3/23"),
-    evento2: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento3: new Evento("Butakera", "Santa Fe", "23:50", 500, 1200, "La joaki", ""),
-    evento4: new Evento("Swift tour", "River", "20:50", 15000, 30000, "Taylor Swift", "30/5/24"),
-    evento5: new Evento("XYZ", "Armenia", "17:00", 80, 500, "Artista 0", "Fecha 0"),
-    evento6: new Evento("Aveces", "Cervantes", "23:00", 1000, 3000, "Zack", "Fecha 0"),
-    evento7: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento8: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento9: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento10: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento11: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    evento12: new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-};
+eventos = [
+    new Evento("Moon time", "Cordoba 1200", "21:30", 2000, 7500, "King Moon", "5/3/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Butakera", "Santa Fe", "23:50", 500, 1200, "La joaki", ""),
+    new Evento("Swift tour", "River", "20:50", 15000, 30000, "Taylor Swift", "30/5/24"),
+    new Evento("XYZ", "Armenia", "17:00", 80, 500, "Artista 0", "Fecha 0"),
+    new Evento("Aveces", "Cervantes", "23:00", 1000, 3000, "Zack", "Fecha 0"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+    new Evento("Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
+]
 
 document.addEventListener("DOMContentLoaded", function () {
-    const contenedorEventos = document.getElementById("contenedor-de-eventos");
-    const eventosArray = Object.values(eventos);
 
-    for (let i = 0; i < eventosArray.length; i++) {
-        const evento = eventosArray[i];
+    const contenedorEventos = document.getElementById("contenedor-de-eventos");
+    
+
+for (let i = 0; i < eventos.length; i++) {
+        const evento = eventos[i];
 
         const column = document.createElement("div");
         column.classList.add("col-md-4");
@@ -112,10 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
         cardBody.appendChild(link);
         card.appendChild(cardBody);
         column.appendChild(card);
-
         contenedorEventos.appendChild(column);
 
-        link.addEventListener("click", function () {
+link.addEventListener("click", function () {
             event.preventDefault();
             seleccionarEvento(evento);
             const infoEvento = document.getElementById("info-evento");
@@ -161,18 +175,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 hacerLaCompra();
             });
 
-            function hacerLaCompra() {
-                const hacerLaCompra = confirm("¿Quiere acceder a este evento?");
-                if (hacerLaCompra) {
-                    alert("¡Haga su compra!");
-                }
-            }
+           
             function ComprarCarrito() {
+                
                 let hacerLaCompra = false;
                 let botonMenosPresionado = false;
                 let botonMasPresionado = false;
 
-                cantEntradasElement = document.getElementById("cant-entradas");
                 cantEntradasElement.innerHTML = `<p cant-entradas></p>`
                 cantEntradasElement.textContent = cantEntradasParaComprar;
 
@@ -188,21 +197,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const botonMas = document.querySelector(".carrito-btn-mas");
                 botonMas.addEventListener("click", function () {
                     botonMasPresionado = true;
-                    cantEntradasParaComprar = hacerEntradasParaComprar(
-                        cantEntradasParaComprar,
-                        botonMenosPresionado,
-                        botonMasPresionado
-                    );
+                    cantEntradasParaComprar = hacerEntradasParaComprar(cantEntradasParaComprar,botonMenosPresionado, botonMasPresionado);
                     botonMasPresionado = false;
 
                     actualizarCantidadEntradas();
                 });
 
-                function actualizarCantidadEntradas() {
-                    cantEntradasElement.textContent = cantEntradasParaComprar;
-                    entradasDisponibles = hacerEntradasRestantes(evento.entradasDisponibles, cantEntradasParaComprar);
-                    console.log(entradasDisponibles);
-                }
+                
             }
 
             eventoSeleccionado = evento;
@@ -215,9 +216,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-   
 
-    
+
+
 
     if (evento && evento.titulo) {
         title.textContent = eventoSeleccionado.titulo;
