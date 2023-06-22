@@ -1,6 +1,12 @@
 .custom-modal {
-    margin-top: 20px;
+    margin-top: 80px;
 }
+
+
+body{
+    background-color: rgb(173, 128, 194);
+}
+
 
 .custom-modal-content {
     border-radius: 20px;
@@ -8,7 +14,29 @@
     color: white;
 }
 
-.modal-info-container .modal-body {
+.modal-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.w {
+    width: 30%;
+    display: flex;
+    margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+.c{
+
+    justify-content: center;
+    align-items: center;
+    margin-left: 49%;
+    margin-top: 30px;
+}
+
+
+.modal-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,8 +51,9 @@
 }
 
 #info-evento {
-    margin-top: 20px;
+    margin-top: 40px;
 }
+
 
 #contenedor-de-eventos {
     margin-bottom: 50px;
@@ -34,12 +63,16 @@
     display: flex;
     align-items: center;
     margin-right: 10px;
-  }
-  
-  .carrito-entradas i {
+}
+
+.carrito-entradas i {
     margin-right: 5px;
-  }
-  
-  .carrito-entradas h1 {
+}
+
+.carrito-entradas h1 {
     margin: 0;
-  }
+}
+
+#centrar {
+    text-align: center;
+}

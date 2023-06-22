@@ -3,54 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El eventador</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-...TuCódigoDeIntegridad..." crossorigin="anonymous" />
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-...TuCódigoDeIntegridad..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <div class="container">
-        <h1 class="text-center">Compre sus entradas en la web :D</h1>
+    <div class="container mt-4">
+    <div class="input-group mb-3">
+      <input type="text" id="searchInput" class="form-control" placeholder="Buscar eventos">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="searchButton">Buscar</button>
+      </div>
+    </div>
+  </div>
 
-        <div class="row" id="contenedor-de-eventos"></div>
+    <div id="tienda">
+        <h1 id="centrar">Tienda</h1>
+    </div>
 
-        <div id="info-evento" class="text-center modal-info-container"></div>
+    <div id="info-evento" class="text-center modal-info-container"></div>
 
-        <div class="text-center" id="comprar-btn-container">
-            <p id="cant-entradas" class="carrito-entradas">0</p>
-        </div>
-
-        <div class="modal custom-modal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center">Información del evento</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="bg-purple rounded p-3">
-                            <p class="text-center mb-0">Título: </p>
-                            <p class="text-center mb-0">Ubicación: </p>
-                            <p class="text-center mb-0">Horario: </p>
-                            <p class="text-center mb-0">Entradas disponibles: </p>
-                            <p class="text-center mb-0">Precio: </p>
-                            <p class="text-center mb-0">Artista: </p>
-                            <p class="text-center mb-0">Día: </p>
-                        </div>
+    <div class="modal custom-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center">Información del evento</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="bg-purple rounded p-3">
+                        <p class="text-center mb-0">Título: </p>
+                        <p class="text-center mb-0">Ubicación: </p>
+                        <p class="text-center mb-0">Horario: </p>
+                        <p class="text-center mb-0">Entradas disponibles: </p>
+                        <p class="text-center mb-0">Precio: </p>
+                        <p class="text-center mb-0">Artista: </p>
+                        <p class="text-center mb-0">Día: </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="comprar-btn-container">  
+        
+    </div>
+    <div class="c"><button id="buy"   class="btn btn-primary btn-sm carrito-btn"      >
+        <i class="fas fa-shopping-cart"></i>
+      </button></div>
 
-    <div class="entradera"> </div>
-   
+    <h1 id="centrar">Carrito</h1>
+    <div id="carrito"></div>
+
 
     <script src="script.js"></script>
 </body>
