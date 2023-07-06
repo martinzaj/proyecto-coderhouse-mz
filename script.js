@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", cargaInicial);
 let Precioserivice = 77.7;
 function cargaInicial() {
@@ -213,27 +215,7 @@ function generarEvento(p) {
 
     comprarBtnContainer.querySelector('button').addEventListener('click', () => {agregarAlCarrito(p.id); }) 
 }
-function agregarAlCarrito(id) {
-    let producto = eventos.find(producto => producto.id == id);
-    let productoEnCarrito = CARRITO.find(producto => producto.id == id);
 
-    if (productoEnCarrito && productoEnCarrito.cantidad < 4) {
-        // Si el producto ya esta en el carrito
-        productoEnCarrito.cantidad++;
-
-    } else if (productoEnCarrito && productoEnCarrito.cantidad >= 4) {
-        // se establece el limite de que no se pueden comprar mas de cuatro
-        alert(" Ya compraste el maximo de entradas ")
-    }
-    else {
-        // La primera vez al agregar un producto
-        producto.cantidad = 1;
-        CARRITO.push(producto);
-    }
-
-    renderizarCarrito(productoEnCarrito);
-    guardarCarritoEnLocalStorage();
-}
 function renderizarCarrito(cantidad) {
     const $carrito = d.getElementById("carrito");
     $carrito.innerHTML = '';
@@ -285,3 +267,41 @@ function cargarCarritoDeLocalStorage() {
         CARRITO = [];
     }
 }
+
+import Swal from 'sweetalert';
+function agregarAlCarrito(id) {
+    let producto = eventos.find(producto => producto.id == id);
+    let productoEnCarrito = CARRITO.find(producto => producto.id == id);
+
+    if (productoEnCarrito && productoEnCarrito.cantidad < 4) {
+        // Si el producto ya esta en el carrito
+
+        productoEnCarrito.cantidad++;
+        mostrarAgregadoACarrito()
+
+    } else if (productoEnCarrito && productoEnCarrito.cantidad >= 4) {
+        // se establece el limite de que no se pueden comprar mas de cuatro
+        alert(" Ya compraste el maximo de entradas ")
+    }
+    else {
+        // La primera vez al agregar un producto
+        producto.cantidad = 1;
+        CARRITO.push(producto);
+        mostrarAgregadoACarrito()
+    }
+
+    renderizarCarrito(productoEnCarrito);
+    guardarCarritoEnLocalStorage();
+}
+
+function mostrarAgregadoACarrito() {
+  Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'success',
+    title: '¡Producto agregado al carrito!',
+    showConfirmButton: false,
+    timer: 2000
+  });
+}
+
