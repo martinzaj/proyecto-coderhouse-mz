@@ -1,0 +1,132 @@
+[
+    {
+        "id": 1,
+        "titulo": "Moon time",
+        "ubicacion": "Cordoba 1200",
+        "horario": "21:30",
+        "entradasDisponibles": 2000,
+        "precio": 7500,
+        "artista": "King Moon",
+        "dia": "5/3/23"
+    },
+    {
+        "id": 2,
+        "titulo": "Ultima gira",
+        "ubicacion": "Hipodromo",
+        "horario": "19:00",
+        "entradasDisponibles": 15000,
+        "precio": 24000,
+        "artista": "Kiss",
+        "dia": "23/9/23"
+    },
+    {
+        "id": 3,
+        "titulo": "Butakera",
+        "ubicacion": "Santa Fe",
+        "horario": "23:50",
+        "entradasDisponibles": 500,
+        "precio": 1200,
+        "artista": "La joaki",
+        "dia": "sin fijar"
+    },
+    {
+        "id": 4,
+        "titulo": "Swift tour",
+        "ubicacion": "River",
+        "horario": "20:50",
+        "entradasDisponibles": 15000,
+        "precio": 30000,
+        "artista": "Taylor Swift",
+        "dia": "30/5/24"
+    },
+    {
+        "id": 5,
+        "titulo": "XYZ",
+        "ubicacion": "Armenia",
+        "horario": "17:00",
+        "entradasDisponibles": 80,
+        "precio": 500,
+        "artista": "Artista x",
+        "dia": "Fecha 0"
+    },
+    {
+        "id": 6,
+        "titulo": "Aveces",
+        "ubicacion": "Cervantes",
+        "horario": "23:00",
+        "entradasDisponibles": 1000,
+        "precio": 3000,
+        "artista": "Zack",
+        "dia": "Fecha 0"
+    },
+    {
+        "id": 7,
+        "titulo": "Ultima gira",
+        "ubicacion": "Hipodromo",
+        "horario": "19:00",
+        "entradasDisponibles": 15000,
+        "precio": 24000,
+        "artista": "Kiss",
+        "dia": "23/9/23"
+    },
+    {
+        "id": 8,
+        "titulo": "Concierto Acústico",
+        "ubicacion": "Teatro Municipal",
+        "horario": "21:00",
+        "entradasDisponibles": 500,
+        "precio": 800,
+        "artista": "Sofía Rodríguez",
+        "dia": "12/10/23"
+    },
+    {
+        "id": 9,
+        "titulo": "Festival de Jazz",
+        "ubicacion": "Parque Central",
+        "horario": "18:30",
+        "entradasDisponibles": 1000,
+        "precio": 1200,
+        "artista": "The Jazz Ensemble",
+        "dia": "7/11/23"
+    },
+    {
+        "id": 10,
+        "titulo": "Noche de Rock",
+        "ubicacion": "Estadio Nacional",
+        "horario": "20:00",
+        "entradasDisponibles": 2000,
+        "precio": 1500,
+        "artista": "Black Lightning",
+        "dia": "19/12/23"
+    },
+    {
+        "id": 11,
+        "titulo": "Fiesta Electrónica",
+        "ubicacion": "Club Nocturno XYZ",
+        "horario": "22:00",
+        "entradasDisponibles": 800,
+        "precio": 500,
+        "artista": "DJ ElectroMan",
+        "dia": "2/1/24"
+    },
+    {
+        "id": 12,
+        "titulo": "Gala de Ópera",
+        "ubicacion": "Gran Teatro",
+        "horario": "19:30",
+        "entradasDisponibles": 300,
+        "precio": 2500,
+        "artista": "Orquesta Sinfónica",
+        "dia": "15/2/24"
+    },
+    {
+        "id": 13,
+        "titulo": "Concierto de Pop",
+        "ubicacion": "Estadio Monumental",
+        "horario": "19:00",
+        "entradasDisponibles": 1500,
+        "precio": 3500,
+        "artista": "Beyonce",
+        "dia": "10/3/24"
+    }
+]

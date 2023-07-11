@@ -3,7 +3,7 @@
 }
 
 
-body{
+body {
     background-color: rgb(173, 128, 194);
 }
 
@@ -24,10 +24,11 @@ body{
     width: 30%;
     display: flex;
     margin: 0 auto;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
 }
-.c{
+
+.c {
 
     justify-content: center;
     align-items: center;
@@ -76,13 +77,18 @@ body{
 #centrar {
     text-align: center;
 }
+
 .swal2-heart-title {
     font-size: 24px;
-    color: #ff0000; /* Color del corazón */
-  }
-  
-  .swal2-heart-title::before {
-    content: "\f004"; /* Código Unicode del corazón en Font Awesome */
-    font-family: "Font Awesome 5 Free"; /* Nombre de la fuente de Font Awesome */
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
-  }
+    color: #ff3b3b;
+    /* Color del corazón */
+}
+
+.swal2-heart-title::before {
+    content: "\f004";
+    /* Código Unicode del corazón en Font Awesome */
+    font-family: "Font Awesome 5 Free";
+    /* Nombre de la fuente de Font Awesome */
+    margin-right: 10px;
+    /* Espacio entre el ícono y el texto */
+}

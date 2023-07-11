@@ -2,37 +2,24 @@ document.addEventListener("DOMContentLoaded", cargaInicial);
 let Precioserivice = 77.7;
 function cargaInicial() {
     cargarCarritoDeLocalStorage()
-    renderizarProductos();
+    setTimeout(() => {
+        renderizarProductos();
+    }, 50);
     renderizarCarrito();
+    obtenerEventos();
+    buscarEventosPorArtista(" ");
 }
-class Evento {
-    constructor(id, titulo, ubicacion, horario, entradasDisponibles, precio, artista, dia) {
-        this.id = id;
-        this.titulo = titulo;
-        this.ubicacion = ubicacion;
-        this.horario = horario;
-        this.entradasDisponibles = entradasDisponibles;
-        this.precio = precio;
-        this.artista = artista;
-        this.dia = dia;
-    }
+let eventos = [];
+function obtenerEventos() {
+    fetch("http://127.0.0.1:5500/eventos.json")
+        .then(response => response.json())
+        .then(data => {
+            eventos = data; // Asignar los datos recibidos a la variable eventos
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
-const eventos = [
-    new Evento(1, "Moon time", "Cordoba 1200", "21:30", 2000, 7500, "King Moon", "5/3/23"),
-    new Evento(2, "Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    new Evento(3, "Butakera", "Santa Fe", "23:50", 500, 1200, "La joaki", "sin fijar"),
-    new Evento(4, "Swift tour", "River", "20:50", 15000, 30000, "Taylor Swift", "30/5/24"),
-    new Evento(5, "XYZ", "Armenia", "17:00", 80, 500, "Artista x", "Fecha 0"),
-    new Evento(6, "Aveces", "Cervantes", "23:00", 1000, 3000, "Zack", "Fecha 0"),
-    new Evento(7, "Ultima gira", "Hipodromo", "19:00", 15000, 24000, "Kiss", "23/9/23"),
-    new Evento(8, "Concierto Acústico", "Teatro Municipal", "21:00", 500, 800, "Sofía Rodríguez", "12/10/23"),
-    new Evento(9, "Festival de Jazz", "Parque Central", "18:30", 1000, 1200, "The Jazz Ensemble", "7/11/23"),
-    new Evento(10, "Noche de Rock", "Estadio Nacional", "20:00", 2000, 1500, "Black Lightning", "19/12/23"),
-    new Evento(11, "Fiesta Electrónica", "Club Nocturno XYZ", "22:00", 800, 500, "DJ ElectroMan", "2/1/24"),
-    new Evento(12, "Gala de Ópera", "Gran Teatro", "19:30", 300, 2500, "Orquesta Sinfónica", "15/2/24"),
-    new Evento(13, "Concierto de Pop", "Estadio Monumental", "19:00", 1500, 3500, "Beyonce", "10/3/24")
-
-]
 const d = document;
 let CARRITO = [];
 // Obtener referencias a los elementos del buscador
@@ -76,7 +63,7 @@ function buscarEventosPorArtista(searchText) {
         cardBody.classList.add("card-body");
         const title = d.createElement("h5");
         title.classList.add("card-title");
-        title.textContent = eventos.artista;
+        title.textContent = p.artista;
         const description = d.createElement("p");
         description.classList.add("card-text");
         description.innerHTML = `Artista: ${p.artista}  Evento: ${p.titulo}   Día: ${p.dia}    Precio: ${p.precio}`;
@@ -113,7 +100,7 @@ ConfBuy.addEventListener('click', () => { // Agregar evento de clic al botón
     Swal.fire({
         icon: 'question',
         title: 'Confirmar compra',
-        text: `¿Deseas realizar la compra de tus productos? La cantidad de dinero a pagar es: ${x}`,
+        text: `¿Deseas realizar la compra de tus productos? La cantidad de dinero a pagar es: ${x}$`,
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -121,12 +108,12 @@ ConfBuy.addEventListener('click', () => { // Agregar evento de clic al botón
         cancelButtonText: 'Cancelar',
     }).then((result) => {
         if (result.isConfirmed) {
-            comprarLosProdutos();
+            comprarLosProdutos(x);
         }
     });
 
 });
-function calcularTotal() {
+function calcularTotal(x) {
     let PrecioAPagar = 0;
     CARRITO.forEach((p) => {
         PrecioAPagar += p.cantidad * p.precio;
@@ -135,30 +122,28 @@ function calcularTotal() {
     PrecioAPagar = PrecioAPagar == Precioserivice ? 0 : PrecioAPagar;
     return PrecioAPagar;
 }
-function comprarLosProdutos() {
+function comprarLosProdutos(x) {
     CARRITO = []; // Vaciar el carrito después de calcular el precio total
     renderizarCarrito();
     guardarCarritoEnLocalStorage();
-    mostrarAvisoDeLaCompraConfirmada();
+    mostrarAvisoDeLaCompraConfirmada(x);
 }
-function mostrarAvisoDeLaCompraConfirmada(){
+function mostrarAvisoDeLaCompraConfirmada(x) {
     Swal.fire({
-        icon: 'custom',
-        title: '<i class="fas fa-heart"></i> Se confirmó tu compra',
+        icon: 'info',
+        title: `<i class="fas fa-heart"></i> Se confirmó tu compra con un total de: ${x}$ <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>`,
         showConfirmButton: false,
         timer: 7000,
         customClass: {
-          title: 'swal2-heart-title'
+            title: 'swal2-heart-title'
         }
-      });
+    });
 }
 function renderizarProductos() {
-
     const $tienda = d.getElementById("tienda");
     let fila;
 
     eventos.forEach((p, index) => {
-
         if (index % 3 === 0) {
             // Cada tres productos, creamos una nueva fila
             fila = d.createElement('div');
@@ -167,11 +152,11 @@ function renderizarProductos() {
         }
 
         //atajo
-        let producto = d.createElement('div')
+        let producto = d.createElement('div');
 
         //generacion de los cards
         producto.classList.add('col-md-4');
-        const column = producto
+        const column = producto;
         column.classList.add("col-md-4");
         const card = d.createElement("div");
         card.classList.add("card");
@@ -180,7 +165,7 @@ function renderizarProductos() {
         cardBody.classList.add("card-body");
         const title = d.createElement("h5");
         title.classList.add("card-title");
-        title.textContent = eventos.artista;
+        title.textContent = p.artista; // Utilizar p.artista en lugar de eventos.artista
         const description = d.createElement("p");
         description.classList.add("card-text");
         description.innerHTML = `Artista: ${p.artista}  Evento: ${p.titulo}   Día: ${p.dia}    Precio: ${p.precio}`;
@@ -192,7 +177,6 @@ function renderizarProductos() {
 
         verEventoBtn.addEventListener('click', () => { // Agregar evento de clic al botón
             generarEvento(p);
-            link.href = "#info-evento";
         });
 
         //se insertan todos los elementos 
@@ -202,11 +186,10 @@ function renderizarProductos() {
         cardBody.appendChild(link);
         card.appendChild(cardBody);
         column.appendChild(card);
-
-
         producto.appendChild(card);
         fila.appendChild(producto);
-    })
+    });
+
 }
 function generarEvento(p) {
     //generacion de la informacion del evento particular que se selecciono
@@ -214,7 +197,7 @@ function generarEvento(p) {
 
     infoEvento.classList.add("mb-3");
     infoEvento.classList.add("custom-modal-content");
-    infoEvento.innerHTML = `<div calass="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header text-center">
+    infoEvento.innerHTML = `<div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header text-center">
   <h5 class="modal-title text-center">Información del evento</h5></div><div class="modal-body"><div class="bg-purple rounded p-3 text-center">
             <p class="mb-0">Título: ${p.titulo}</p>
             <p class="mb-0">Ubicación: ${p.ubicacion}</p>
@@ -230,7 +213,7 @@ function generarEvento(p) {
     comprarBtnContainer.innerHTML = ` <div class="text-center"   id="comprar-btn">
         <button id="${p.id}" class="btn btn-primary mt-3">Agregar al carrito</button> </div>`;
 
-    comprarBtnContainer.querySelector('button').addEventListener('click', () => { agregarAlCarrito(p.id); })
+    comprarBtnContainer.querySelector('button').addEventListener('click', () => { agregarAlCarrito(p.id, eventos); })
 }
 function renderizarCarrito(cantidad) {
     const $carrito = d.getElementById("carrito");
@@ -243,8 +226,8 @@ function renderizarCarrito(cantidad) {
         producto.innerHTML = `
         <div  class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header text-center">
        </div><div class="modal-body"><div class="bg-purple rounded p-3 text-center">
-                <h1 id= "centrar"  class="mb-0"> ${p.artista}</h1>
-                <h2 id= "centrar"  class="mb-0"> Entradas para comprar:  ${p.cantidad}</h2>
+                <h1 id="centrar"  class="mb-0"> ${p.artista}</h1>
+                <h2 id="centrar"  class="mb-0"> Entradas para comprar:  ${p.cantidad}</h2>
                   <p class="mb-0"> ${p.titulo}</p>
                   <p class="mb-0">Ubicación: ${p.ubicacion}</p>
                   <p class="mb-0">Horario: ${p.horario}</p>
@@ -272,9 +255,9 @@ function eliminarProductoDelCarrito(indice) {
     renderizarCarrito();
     MostrarProductoQuitado()
     guardarCarritoEnLocalStorage();
-    
+
 }
-function MostrarProductoQuitado(){
+function MostrarProductoQuitado() {
     Swal.fire({
         position: 'bottom-end',
         icon: 'success',
@@ -282,7 +265,7 @@ function MostrarProductoQuitado(){
         showConfirmButton: false,
         timer: 2000,
         toast: true
-      });
+    });
 }
 function guardarCarritoEnLocalStorage() {
     localStorage.setItem('carrito', JSON.stringify(CARRITO));
@@ -295,7 +278,7 @@ function cargarCarritoDeLocalStorage() {
         CARRITO = [];
     }
 }
-function agregarAlCarrito(id) {
+function agregarAlCarrito(id, eventos) {
     let producto = eventos.find(producto => producto.id == id);
     let productoEnCarrito = CARRITO.find(producto => producto.id == id);
 
